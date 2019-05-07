@@ -51,9 +51,21 @@ with open(reportPath, "w", newline = "") as reportFile:
     reportFile.write("-------------------------\n")
     reportFile.write(f"Total Votes: {totalVotes}\n")
     reportFile.write("-------------------------\n")
+    
+    #real quick break in the middle of writting to figure out the winner so we can mooch off this candidates for loop
+    winner = ["name",0]
     for cd in candidates:
+
+        #lets just find the winner real fast...
+        if candidates[cd] > winner[1]:
+            winner[0] = cd
+            winner[1] = candidates[cd]
+
+        #ok back to writting all the candidates, their votes, percentage...
         percentWin = (float(candidates[cd])/totalVotes)*100
         reportFile.write(f'{cd}: {"{:.3f}".format(percentWin)}% ({candidates[cd]})\n')
+    
+    
     reportFile.write("-------------------------\n")    
-        
+    reportFile.write(f"Winner: {winner[0]}\n")
     reportFile.write("-------------------------\n")    
